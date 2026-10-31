@@ -1,145 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="theme-color" content="#071b2a">
-	<title>Bienvenidos | Grupo 2</title>
-	<style>
-		:root {
-			color-scheme: dark;
-			--ink: #edf8ff;
-			--muted: #a9c1d0;
-			--cyan: #62e5db;
-			--blue: #70a9ff;
-		}
-
-		* { box-sizing: border-box; }
-
-		body {
-			min-height: 100vh;
-			margin: 0;
-			display: grid;
-			place-items: center;
-			overflow: hidden;
-			padding: 2rem;
-			color: var(--ink);
-			font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-			background:
-				radial-gradient(ellipse at 18% 20%, #123a50 0, transparent 38%),
-				radial-gradient(ellipse at 85% 85%, #153b58 0, transparent 36%),
-				#071b2a;
-		}
-
-		body::before {
-			position: fixed;
-			inset: 0;
-			content: "";
-			pointer-events: none;
-			opacity: .18;
-			background-image: linear-gradient(#8bd7ed22 1px, transparent 1px), linear-gradient(90deg, #8bd7ed22 1px, transparent 1px);
-			background-size: 54px 54px;
-			mask-image: linear-gradient(to bottom, black, transparent 90%);
-		}
-
-		main {
-			position: relative;
-			width: min(100%, 900px);
-			padding: clamp(2.5rem, 8vw, 6rem);
-			text-align: center;
-			border: 1px solid #b5e8ff24;
-			border-radius: 28px;
-			background: linear-gradient(145deg, #ffffff0d, #ffffff04);
-			box-shadow: 0 30px 100px #0005, inset 0 1px #ffffff18;
-			backdrop-filter: blur(12px);
-			animation: rise .8s ease-out both;
-		}
-
-		.symbol {
-			display: grid;
-			width: 76px;
-			height: 76px;
-			margin: 0 auto 2rem;
-			place-items: center;
-			border: 1px solid #62e5db66;
-			border-radius: 22px;
-			color: var(--cyan);
-			background: #62e5db12;
-			box-shadow: 0 0 45px #62e5db1c;
-		}
-
-		.symbol svg { width: 38px; height: 38px; }
-
-		.eyebrow {
-			margin: 0 0 1rem;
-			color: var(--cyan);
-			font-size: .78rem;
-			font-weight: 700;
-			letter-spacing: .22em;
-			text-transform: uppercase;
-		}
-
-		h1 {
-			margin: 0;
-			font-size: clamp(3.2rem, 10vw, 6.8rem);
-			line-height: .98;
-			letter-spacing: -.075em;
-		}
-
-		h1 span {
-			display: block;
-			color: transparent;
-			background: linear-gradient(100deg, var(--cyan), var(--blue));
-			background-clip: text;
-			-webkit-background-clip: text;
-		}
-
-		.intro {
-			max-width: 580px;
-			margin: 1.8rem auto 0;
-			color: var(--muted);
-			font-size: clamp(1rem, 2.5vw, 1.2rem);
-			line-height: 1.8;
-		}
-
-		.divider {
-			width: 64px;
-			height: 2px;
-			margin: 2.4rem auto 1.4rem;
-			background: linear-gradient(90deg, var(--cyan), var(--blue));
-		}
-
-		.tagline {
-			margin: 0;
-			color: #d3e7f2;
-			font-size: .9rem;
-			letter-spacing: .06em;
-		}
-
-		@keyframes rise {
-			from { opacity: 0; transform: translateY(18px); }
-			to { opacity: 1; transform: translateY(0); }
-		}
-
-		@media (prefers-reduced-motion: reduce) {
-			*, *::before, *::after { animation-duration: .01ms !important; }
-		}
-	</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>NEXUS IoT | Centro de control</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/app.js" defer></script>
 </head>
 <body>
-	<main>
-		<div class="symbol" aria-hidden="true">
-			<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M24 7v7m0 20v7M7 24h7m20 0h7M12 12l5 5m14 14 5 5m0-24-5 5m-14 14-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-				<circle cx="24" cy="24" r="9" stroke="currentColor" stroke-width="2"/>
-				<circle cx="24" cy="24" r="3" fill="currentColor"/>
-			</svg>
-		</div>
-		<p class="eyebrow">Telemetría · Infraestructura · IoT</p>
-		<h1>Bienvenidos <span>Grupo 2</span></h1>
-		<p class="intro">Conectamos ideas, tecnología y talento para construir soluciones inteligentes para un mundo más conectado.</p>
-		<div class="divider" aria-hidden="true"></div>
-		<p class="tagline">Innovación que conecta.</p>
-	</main>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a href="#dashboard" class="brand" aria-label="NEXUS IoT inicio"><span class="brand-icon">◈</span><span>NEXUS <b>IoT</b><small>SMART BUILDING SYSTEM</small></span></a>
+    <div class="workspace"><span class="workspace-icon">▦</span><span><strong>Edificio Central</strong><small>Entorno de demostración</small></span><span class="chevron">⌄</span></div>
+    <div class="nav-label">PLATAFORMA</div>
+    <nav aria-label="Navegación principal">
+      <button class="nav-item active" data-view="dashboard"><span>▦</span> Vista general</button>
+      <button class="nav-item" data-view="devices"><span>⌘</span> Dispositivos</button>
+      <button class="nav-item" data-view="history"><span>▥</span> Historial de lecturas</button>
+      <button class="nav-item" data-view="alarms"><span>♧</span> Reglas y alertas <em id="alarm-count">0</em></button>
+      <button class="nav-item" data-view="settings"><span>⚙</span> Configuración</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="system-health"><span class="pulse"></span> Sistema en línea <small>SIMULACIÓN LOCAL</small></div><div class="sidebar-profile"><span class="avatar">AD</span><span><strong>Administrador</strong><small>Modo demostración</small></span></div></div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+  <div class="main-panel">
+    <header class="topbar"><div class="left-top"><button id="menu-button" class="icon-btn menu-button" aria-label="Abrir menú">☰</button><span class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb">Vista general</strong></span></div><div class="top-actions"><span class="live-indicator"><span class="pulse"></span> EN VIVO</span><span id="clock" class="clock"></span><button class="icon-btn" id="theme-btn" title="Alternar tema" aria-label="Alternar tema">☾</button><span class="avatar top-avatar">AD</span></div></header>
+    <main id="view-container" tabindex="-1"></main>
+    <footer>© <span id="year"></span> NEXUS IoT · Proyecto académico · Datos simulados (sin conexión AWS)</footer>
+  </div>
+</div>
+<div id="toast-region" class="toast-region" aria-live="polite"></div>
+<dialog id="modal"><form method="dialog" id="modal-form"><div class="modal-heading"><h2 id="modal-title">Nuevo dispositivo</h2><button class="icon-btn" value="cancel" aria-label="Cerrar">✕</button></div><div id="modal-fields"></div><div class="modal-actions"><button class="btn secondary" value="cancel">Cancelar</button><button class="btn primary" id="modal-save" value="save">Guardar cambios</button></div></form></dialog>
 </body>
 </html>
