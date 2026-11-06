@@ -63,7 +63,9 @@ tests/            Prueba integral de la API y persistencia
 data/             Base local autogenerada, excluida de Git
 ```
 
-`.env` está excluido de Git. En otra computadora, copia `.env.example` a `.env` y configura tus propias credenciales **antes del primer arranque**. El usuario solo se crea al inicializar una base vacía; cambiar `ADMIN_PASSWORD` después no cambia la contraseña ya almacenada. Si omites la contraseña al crear una base, el servidor genera una y la muestra una sola vez en su terminal. Las sesiones se pierden al reiniciar.
+Para usar el acceso compartido en una copia clonada en Windows, ejecuta `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\preparar-windows.ps1` desde la carpeta del proyecto. Escribe la contraseña que te compartió el equipo cuando el script te la pida. Después, ejecuta `npm.cmd start` e inicia sesión con `douglas.mendez1@catolica.edu.sv`. El script puede agregar esta cuenta a una base que ya contiene otros usuarios y guarda su contraseña como hash en SQLite.
+
+`.env` está excluido de Git. Si preparas una cuenta individual sin el script, copia `.env.example` a `.env` y ajusta las credenciales antes del primer arranque. Cambiar `ADMIN_PASSWORD` después no cambia la contraseña ya almacenada. Las sesiones se pierden al reiniciar.
 
 El servidor escucha solo en `127.0.0.1` por defecto. La autenticación HTTP está pensada para esta fase local. Antes de publicar, la fase 2 deberá incorporar HTTPS, gestión de secretos, sesiones compartidas y políticas de acceso adecuadas.
 

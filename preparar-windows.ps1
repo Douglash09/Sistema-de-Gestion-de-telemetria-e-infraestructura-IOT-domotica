@@ -35,7 +35,24 @@ if ((Get-NodeVersion) -lt $minimumVersion) {
 $config = Join-Path $PSScriptRoot '.env'
 if (-not (Test-Path -LiteralPath $config)) {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot '.env.example') -Destination $config
-    Write-Host 'Se creo .env. Define tu correo y contrasena de administrador antes del primer arranque.'
+    Write-Host 'Se creo el archivo .env.'
+}
+
+Write-Host 'Acceso compartido: douglas.mendez1@catolica.edu.sv'
+$password = Read-Host 'Escribe la contrasena compartida de DomotiX IoT' -AsSecureString
+$passwordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
+Push-Location -LiteralPath $PSScriptRoot
+try {
+    $node = Get-Command node.exe -CommandType Application | Select-Object -First 1
+    [Runtime.InteropServices.Marshal]::PtrToStringBSTR($passwordPointer) |
+        & $node.Source --env-file=.env src/configure-shared-access.js
+    if ($LASTEXITCODE -ne 0) {
+        throw 'No se pudo configurar el acceso compartido.'
+    }
+} finally {
+    [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($passwordPointer)
+    $password.Dispose()
+    Pop-Location
 }
 
 Write-Host "Node.js $(Get-NodeVersion) listo. El proyecto no necesita paquetes adicionales."
