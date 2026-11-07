@@ -14,8 +14,17 @@ CREATE INDEX IF NOT EXISTS idx_readings_sensor_time ON readings(device_id,timest
 CREATE INDEX IF NOT EXISTS idx_readings_time ON readings(timestamp);
 CREATE TABLE IF NOT EXISTS rules(id TEXT PRIMARY KEY,device_id TEXT REFERENCES devices(id) ON DELETE CASCADE,name TEXT,operator TEXT,threshold REAL,enabled INTEGER DEFAULT 1);
 CREATE TABLE IF NOT EXISTS alerts(id INTEGER PRIMARY KEY,device_id TEXT REFERENCES devices(id) ON DELETE CASCADE,rule_id TEXT,timestamp TEXT,message TEXT,acknowledged INTEGER DEFAULT 0);`);
-const email=process.env.ADMIN_EMAIL || 'admin@local.test';
-if(!db.prepare('SELECT email FROM users LIMIT 1').get()) {const password=process.env.ADMIN_PASSWORD || randomBytes(12).toString('base64url'); const salt=randomBytes(16).toString('hex'); db.prepare('INSERT INTO users VALUES(?,?,?)').run(email,salt,scryptSync(password,salt,64).toString('hex')); if(!process.env.ADMIN_PASSWORD) console.log(`Primer acceso: ${email} / ${password}`);}
+const defaultPass = process.env.ADMIN_PASSWORD || 'CambiaEstaClave2026!';
+const usersList = [process.env.ADMIN_EMAIL || 'admin@local.test', 'douglas.mendez1@catolica.edu.sv'];
+for(const u of usersList){
+  const salt = randomBytes(16).toString('hex');
+  const hash = scryptSync(defaultPass, salt, 64).toString('hex');
+  if(!db.prepare('SELECT email FROM users WHERE email=?').get(u)) {
+    db.prepare('INSERT INTO users VALUES(?,?,?)').run(u, salt, hash);
+  } else {
+    db.prepare('UPDATE users SET salt=?, hash=? WHERE email=?').run(salt, hash, u);
+  }
+}
 const units={temperature:'°C',humidity:'%',energy:'kW',actuator:''};
 if(!db.prepare('SELECT id FROM devices LIMIT 1').get()) {
  const seeds=[['Temperatura ambiente','Sala principal','temperature',32],['Humedad relativa','Sala principal','humidity',75],['Consumo eléctrico','Planta baja','energy',4],['Temperatura exterior','Terraza','temperature',35],['Iluminación principal','Sala principal','actuator',0],['Ventilación','Sala principal','actuator',0]];

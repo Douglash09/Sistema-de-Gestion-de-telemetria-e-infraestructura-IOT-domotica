@@ -38,22 +38,9 @@ if (-not (Test-Path -LiteralPath $config)) {
     Write-Host 'Se creo el archivo .env.'
 }
 
-Write-Host 'Acceso compartido: douglas.mendez1@catolica.edu.sv'
-$password = Read-Host 'Escribe la contrasena compartida de DomotiX IoT' -AsSecureString
-$passwordPointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
-Push-Location -LiteralPath $PSScriptRoot
-try {
-    $node = Get-Command node.exe -CommandType Application | Select-Object -First 1
-    [Runtime.InteropServices.Marshal]::PtrToStringBSTR($passwordPointer) |
-        & $node.Source --env-file=.env src/configure-shared-access.js
-    if ($LASTEXITCODE -ne 0) {
-        throw 'No se pudo configurar el acceso compartido.'
-    }
-} finally {
-    [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($passwordPointer)
-    $password.Dispose()
-    Pop-Location
-}
+Write-Host 'Credenciales predeterminadas listas:'
+Write-Host '1. admin@local.test -> CambiaEstaClave2026!'
+Write-Host '2. douglas.mendez1@catolica.edu.sv -> CambiaEstaClave2026!'
 
 Write-Host "Node.js $(Get-NodeVersion) listo. El proyecto no necesita paquetes adicionales."
 Write-Host 'Desde la carpeta del proyecto, ejecuta npm.cmd start y abre http://127.0.0.1:3000.'
