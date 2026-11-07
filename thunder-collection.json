@@ -1,61 +1,132 @@
 {
-  "clientName": "Thunder Client",
+  "client": "Thunder Client",
   "collectionName": "DomotiX IoT - UNICAES CN 2026",
-  "collectionId": "domotix-unicaes-cn",
-  "dateExported": "2026-11-06",
+  "dateExported": "2026-11-06T22:25:00.000Z",
   "version": "1.1",
   "folders": [],
   "requests": [
     {
-      "name": "1. Login Administrador",
-      "method": "POST",
+      "_id": "f1b2c3d4-e5f6-7890-abcd-111111111111",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "1. Iniciar Sesión (Login Admin)",
       "url": "http://127.0.0.1:3000/api/login",
-      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "method": "POST",
+      "sortNum": 10000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "params": [],
       "body": {
         "type": "json",
-        "raw": "{\n  \"email\": \"admin@local.test\",\n  \"password\": \"CambiaEstaClave2026!\"\n}"
-      }
+        "raw": "{\n  \"email\": \"admin@local.test\",\n  \"password\": \"CambiaEstaClave2026!\"\n}",
+        "form": []
+      },
+      "tests": []
     },
     {
-      "name": "2. Listar Nodos (CRUD)",
+      "_id": "f1b2c3d4-e5f6-7890-abcd-222222222222",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "2. Listar Nodos y Sensores",
+      "url": "http://127.0.0.1:3000/api/devices",
       "method": "GET",
-      "url": "http://127.0.0.1:3000/api/devices",
-      "headers": []
+      "sortNum": 20000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
     },
     {
-      "name": "3. Crear Nodo (CRUD)",
-      "method": "POST",
+      "_id": "f1b2c3d4-e5f6-7890-abcd-333333333333",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "3. Crear Nuevo Nodo (Sensor Zona A)",
       "url": "http://127.0.0.1:3000/api/devices",
-      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "method": "POST",
+      "sortNum": 30000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "params": [],
       "body": {
         "type": "json",
-        "raw": "{\n  \"name\": \"Sensor Zona A\",\n  \"location\": \"Planta Alta\",\n  \"type\": \"temperature\",\n  \"threshold\": 32\n}"
-      }
+        "raw": "{\n  \"name\": \"Sensor Zona A\",\n  \"location\": \"Sala de Servidores\",\n  \"type\": \"temperature\",\n  \"threshold\": 32.5\n}",
+        "form": []
+      },
+      "tests": []
     },
     {
-      "name": "4. Ingesta Telemetría IoT (API Key)",
-      "method": "POST",
+      "_id": "f1b2c3d4-e5f6-7890-abcd-444444444444",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "4. Ingesta de Telemetría IoT (API Key)",
       "url": "http://127.0.0.1:3000/api/telemetry",
+      "method": "POST",
+      "sortNum": 40000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
       "headers": [
         { "name": "Content-Type", "value": "application/json" },
         { "name": "X-API-Key", "value": "cambia-esta-clave-iot-segura-2026" }
       ],
+      "params": [],
       "body": {
         "type": "json",
-        "raw": "{\n  \"device_id\": \"id-del-sensor\",\n  \"value\": 29.5\n}"
-      }
+        "raw": "{\n  \"device_id\": \"b8c5f0ef-90d5-45dc-8610-d8869c9b91e0\",\n  \"value\": 29.8\n}",
+        "form": []
+      },
+      "tests": []
     },
     {
-      "name": "5. Consultar Histórico con Filtro de Fechas",
-      "method": "GET",
+      "_id": "f1b2c3d4-e5f6-7890-abcd-555555555555",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "5. Consultar Histórico con Filtro Fechas",
       "url": "http://127.0.0.1:3000/api/readings?from=2026-11-01T00:00:00.000Z&to=2026-11-07T23:59:59.000Z",
-      "headers": []
+      "method": "GET",
+      "sortNum": 50000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
+      "headers": [],
+      "params": [
+        { "name": "from", "value": "2026-11-01T00:00:00.000Z" },
+        { "name": "to", "value": "2026-11-07T23:59:59.000Z" }
+      ],
+      "tests": []
     },
     {
-      "name": "6. Listar Reglas de Alerta",
-      "method": "GET",
+      "_id": "f1b2c3d4-e5f6-7890-abcd-666666666666",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "6. Listar Reglas de Alarma",
       "url": "http://127.0.0.1:3000/api/rules",
-      "headers": []
+      "method": "GET",
+      "sortNum": 60000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
+      "_id": "f1b2c3d4-e5f6-7890-abcd-777777777777",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "7. Listar Alertas Disparadas",
+      "url": "http://127.0.0.1:3000/api/alerts",
+      "method": "GET",
+      "sortNum": 70000,
+      "created": "2026-11-06T22:25:00.000Z",
+      "modified": "2026-11-06T22:25:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
     }
   ]
 }
