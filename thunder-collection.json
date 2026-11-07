@@ -1,0 +1,61 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "DomotiX IoT - UNICAES CN 2026",
+  "collectionId": "domotix-unicaes-cn",
+  "dateExported": "2026-11-06",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "name": "1. Login Administrador",
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/login",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"email\": \"admin@local.test\",\n  \"password\": \"CambiaEstaClave2026!\"\n}"
+      }
+    },
+    {
+      "name": "2. Listar Nodos (CRUD)",
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/devices",
+      "headers": []
+    },
+    {
+      "name": "3. Crear Nodo (CRUD)",
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/devices",
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"name\": \"Sensor Zona A\",\n  \"location\": \"Planta Alta\",\n  \"type\": \"temperature\",\n  \"threshold\": 32\n}"
+      }
+    },
+    {
+      "name": "4. Ingesta Telemetría IoT (API Key)",
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/telemetry",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "X-API-Key", "value": "cambia-esta-clave-iot-segura-2026" }
+      ],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"device_id\": \"id-del-sensor\",\n  \"value\": 29.5\n}"
+      }
+    },
+    {
+      "name": "5. Consultar Histórico con Filtro de Fechas",
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/readings?from=2026-11-01T00:00:00.000Z&to=2026-11-07T23:59:59.000Z",
+      "headers": []
+    },
+    {
+      "name": "6. Listar Reglas de Alerta",
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/rules",
+      "headers": []
+    }
+  ]
+}

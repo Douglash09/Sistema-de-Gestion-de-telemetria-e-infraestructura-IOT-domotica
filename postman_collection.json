@@ -1,0 +1,393 @@
+{
+  "info": {
+    "_postman_id": "b1a2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "DomotiX IoT - API Collection (UNICAES CN 2026)",
+    "description": "Colección de pruebas automatizadas y manuales de endpoints para el Proyecto de Telemetría e Infraestructura IoT Domótica. Cátedra de Cómputo en la Nube - Ing. Herberth Contreras.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:3000",
+      "type": "string"
+    },
+    {
+      "key": "apiKey",
+      "value": "cambia-esta-clave-iot-segura-2026",
+      "type": "string"
+    },
+    {
+      "key": "deviceId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "readingId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "ruleId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "alertId",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Seguridad y Autenticación",
+      "item": [
+        {
+          "name": "POST Iniciar Sesión (Login)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@local.test\",\n  \"password\": \"CambiaEstaClave2026!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "login"]
+            },
+            "description": "Autenticación de administrador con scrypt y cookie de sesión HttpOnly."
+          }
+        },
+        {
+          "name": "GET Verificar Sesión Actual (/me)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "me"]
+            },
+            "description": "Comprueba si la cookie de sesión activa es válida."
+          }
+        },
+        {
+          "name": "POST Cerrar Sesión (Logout)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "logout"]
+            },
+            "description": "Destruye la sesión activa y limpia la cookie."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. CRUD Nodos y Sensores",
+      "item": [
+        {
+          "name": "GET Listar Dispositivos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length > 0) {",
+                  "  pm.collectionVariables.set('deviceId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/devices",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "devices"]
+            },
+            "description": "Obtiene todos los nodos registrados junto a su última lectura y estado."
+          }
+        },
+        {
+          "name": "POST Crear Nuevo Nodo (Sensor Zona A)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.id) {",
+                  "  pm.collectionVariables.set('deviceId', res.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sensor Zona A\",\n  \"location\": \"Sala de Servidores\",\n  \"type\": \"temperature\",\n  \"threshold\": 32.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/devices",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "devices"]
+            },
+            "description": "Registra un nuevo nodo físico con su ubicación y umbral de referencia."
+          }
+        },
+        {
+          "name": "PATCH Actualizar Umbral de Nodo",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"threshold\": 35.0,\n  \"name\": \"Sensor Zona A (Calibrado)\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/devices/{{deviceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "devices", "{{deviceId}}"]
+            },
+            "description": "Actualiza el nombre, ubicación o umbral crítico del nodo."
+          }
+        },
+        {
+          "name": "PATCH Desactivar Nodo (Previo a eliminar)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": 0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/devices/{{deviceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "devices", "{{deviceId}}"]
+            },
+            "description": "Desconecta el nodo para habilitar su eliminación segura."
+          }
+        },
+        {
+          "name": "DELETE Eliminar Nodo Desconectado",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/devices/{{deviceId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "devices", "{{deviceId}}"]
+            },
+            "description": "Elimina el nodo desactivado y sus registros en cascada."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. CRUD Histórico de Lecturas (Time-Series)",
+      "item": [
+        {
+          "name": "POST Insertar Telemetría (con X-API-Key de Simulador)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-API-Key", "value": "{{apiKey}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"device_id\": \"{{deviceId}}\",\n  \"value\": 28.75,\n  \"timestamp\": \"2026-11-06T20:00:00.000Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/telemetry",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "telemetry"]
+            },
+            "description": "Ingesta de telemetría IoT mediante API Key o sesión administrativa."
+          }
+        },
+        {
+          "name": "GET Consultar Historial con Filtro por Fechas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length > 0) {",
+                  "  pm.collectionVariables.set('readingId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/readings?from=2026-11-01T00:00:00.000Z&to=2026-11-07T23:59:59.000Z",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "readings"],
+              "query": [
+                { "key": "from", "value": "2026-11-01T00:00:00.000Z" },
+                { "key": "to", "value": "2026-11-07T23:59:59.000Z" }
+              ]
+            },
+            "description": "Consulta de series temporales indexadas por timestamp."
+          }
+        },
+        {
+          "name": "DELETE Eliminar Lectura Corrupta de Prueba",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/readings/{{readingId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "readings", "{{readingId}}"]
+            },
+            "description": "Depura lecturas anómalas de prueba directamente por su identificador."
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. CRUD Reglas de Alarma y Alertas",
+      "item": [
+        {
+          "name": "GET Listar Reglas de Alarma",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length > 0) {",
+                  "  pm.collectionVariables.set('ruleId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/rules",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rules"]
+            },
+            "description": "Obtiene la lista de reglas configuradas para los sensores."
+          }
+        },
+        {
+          "name": "POST Crear Regla de Alarma (temp > 35°C)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alarma de sobrecalentamiento\",\n  \"device_id\": \"{{deviceId}}\",\n  \"operator\": \">\",\n  \"threshold\": 35.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/rules",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rules"]
+            },
+            "description": "Crea una condición lógica vinculada a un sensor de telemetría."
+          }
+        },
+        {
+          "name": "PATCH Actualizar Estado de Regla (Desactivar)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": 0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/rules/{{ruleId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "rules", "{{ruleId}}"]
+            },
+            "description": "Pausa o reanuda una regla de monitoreo."
+          }
+        },
+        {
+          "name": "GET Listar Registro de Alertas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.length > 0) {",
+                  "  pm.collectionVariables.set('alertId', res[0].id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts"]
+            },
+            "description": "Consulta las últimas alertas generadas por el motor de reglas."
+          }
+        },
+        {
+          "name": "PATCH Inactivar / Atender Alerta",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/alerts/{{alertId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alerts", "{{alertId}}"]
+            },
+            "description": "Reconoce la alerta y la marca como atendida (inactiva)."
+          }
+        }
+      ]
+    }
+  ]
+}
