@@ -23,7 +23,7 @@
 ## 🎨 Prototipo Interactivo en Figma (Laboratorio 2)
 
 El diseño UI/UX y flujo completo de interacción para la plataforma web administrativa se encuentra en Figma:
-- **Enlace al Prototipo en Figma:** `[Pega aquí el enlace de tu proyecto de Figma]`
+- **Enlace al Prototipo en Figma:** [Ver Prototipo en Figma](https://www.figma.com/design/C33blnMQpEMLAegpQ7OYcg/Untitled?node-id=0-1&t=QxmEqbWbl1ykIgYZ-1)
 - **Flujos modelados:** Autenticación administrativa, panel de control en tiempo real, administración de nodos (CRUD), consulta histórica con filtros temporales y configuración de alertas de sobrecalentamiento/fallo.
 
 ---
