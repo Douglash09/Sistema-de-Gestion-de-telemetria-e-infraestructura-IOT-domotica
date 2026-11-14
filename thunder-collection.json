@@ -1,15 +1,50 @@
 {
   "client": "Thunder Client",
   "collectionName": "DomotiX IoT - UNICAES CN 2026",
-  "dateExported": "2026-11-06T22:25:00.000Z",
+  "dateExported": "2026-11-13T18:11:00.000Z",
   "version": "1.1",
   "folders": [],
   "requests": [
     {
+      "_id": "f1b2c3d4-e5f6-7890-abcd-cloud1111111",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "☁️ AWS Cloud: Ingesta Telemetria (POST)",
+      "url": "https://xbwdrj52xj.execute-api.us-east-1.amazonaws.com/telemetry",
+      "method": "POST",
+      "sortNum": 1000,
+      "created": "2026-11-13T18:11:00.000Z",
+      "modified": "2026-11-13T18:11:00.000Z",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" }
+      ],
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"device_id\": \"sensor-zona-a\",\n  \"type\": \"temperature\",\n  \"location\": \"Sala de Servidores\",\n  \"value\": 38.5,\n  \"threshold\": 35.0\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "_id": "f1b2c3d4-e5f6-7890-abcd-cloud2222222",
+      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
+      "containerId": "",
+      "name": "☁️ AWS Cloud: Consultar DynamoDB (GET)",
+      "url": "https://xbwdrj52xj.execute-api.us-east-1.amazonaws.com/telemetry",
+      "method": "GET",
+      "sortNum": 2000,
+      "created": "2026-11-13T18:11:00.000Z",
+      "modified": "2026-11-13T18:11:00.000Z",
+      "headers": [],
+      "params": [],
+      "tests": []
+    },
+    {
       "_id": "f1b2c3d4-e5f6-7890-abcd-111111111111",
       "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
       "containerId": "",
-      "name": "1. Iniciar Sesión (Login Admin)",
+      "name": "1. Iniciar Sesión (Login Local)",
       "url": "http://127.0.0.1:3000/api/login",
       "method": "POST",
       "sortNum": 10000,
@@ -30,7 +65,7 @@
       "_id": "f1b2c3d4-e5f6-7890-abcd-222222222222",
       "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
       "containerId": "",
-      "name": "2. Listar Nodos y Sensores",
+      "name": "2. Listar Nodos y Sensores (Local)",
       "url": "http://127.0.0.1:3000/api/devices",
       "method": "GET",
       "sortNum": 20000,
@@ -44,7 +79,7 @@
       "_id": "f1b2c3d4-e5f6-7890-abcd-333333333333",
       "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
       "containerId": "",
-      "name": "3. Crear Nuevo Nodo (Sensor Zona A)",
+      "name": "3. Crear Nuevo Nodo (Sensor Zona A Local)",
       "url": "http://127.0.0.1:3000/api/devices",
       "method": "POST",
       "sortNum": 30000,
@@ -62,32 +97,10 @@
       "tests": []
     },
     {
-      "_id": "f1b2c3d4-e5f6-7890-abcd-444444444444",
-      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
-      "containerId": "",
-      "name": "4. Ingesta de Telemetría IoT (API Key)",
-      "url": "http://127.0.0.1:3000/api/telemetry",
-      "method": "POST",
-      "sortNum": 40000,
-      "created": "2026-11-06T22:25:00.000Z",
-      "modified": "2026-11-06T22:25:00.000Z",
-      "headers": [
-        { "name": "Content-Type", "value": "application/json" },
-        { "name": "X-API-Key", "value": "cambia-esta-clave-iot-segura-2026" }
-      ],
-      "params": [],
-      "body": {
-        "type": "json",
-        "raw": "{\n  \"device_id\": \"b8c5f0ef-90d5-45dc-8610-d8869c9b91e0\",\n  \"value\": 29.8\n}",
-        "form": []
-      },
-      "tests": []
-    },
-    {
       "_id": "f1b2c3d4-e5f6-7890-abcd-555555555555",
       "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
       "containerId": "",
-      "name": "5. Consultar Histórico con Filtro Fechas",
+      "name": "4. Consultar Histórico Local",
       "url": "http://127.0.0.1:3000/api/readings?from=2026-11-01T00:00:00.000Z&to=2026-11-07T23:59:59.000Z",
       "method": "GET",
       "sortNum": 50000,
@@ -98,34 +111,6 @@
         { "name": "from", "value": "2026-11-01T00:00:00.000Z" },
         { "name": "to", "value": "2026-11-07T23:59:59.000Z" }
       ],
-      "tests": []
-    },
-    {
-      "_id": "f1b2c3d4-e5f6-7890-abcd-666666666666",
-      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
-      "containerId": "",
-      "name": "6. Listar Reglas de Alarma",
-      "url": "http://127.0.0.1:3000/api/rules",
-      "method": "GET",
-      "sortNum": 60000,
-      "created": "2026-11-06T22:25:00.000Z",
-      "modified": "2026-11-06T22:25:00.000Z",
-      "headers": [],
-      "params": [],
-      "tests": []
-    },
-    {
-      "_id": "f1b2c3d4-e5f6-7890-abcd-777777777777",
-      "colId": "a1b2c3d4-e5f6-7890-abcd-000000000000",
-      "containerId": "",
-      "name": "7. Listar Alertas Disparadas",
-      "url": "http://127.0.0.1:3000/api/alerts",
-      "method": "GET",
-      "sortNum": 70000,
-      "created": "2026-11-06T22:25:00.000Z",
-      "modified": "2026-11-06T22:25:00.000Z",
-      "headers": [],
-      "params": [],
       "tests": []
     }
   ]
