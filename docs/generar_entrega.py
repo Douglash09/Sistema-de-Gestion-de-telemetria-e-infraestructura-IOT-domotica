@@ -31,7 +31,7 @@ h('Versión de los archivos')
 manifest=json.loads((ROOT/'aws/build/manifest.json').read_text())
 p('Huella SHA256 del frontend:<br/>'+manifest['frontendSha256'],small)
 p('Huella SHA256 del backend:<br/>'+manifest['backendSha256'],small)
-p('Registrar el commit final en el acta de congelamiento antes del cierre. Estas huellas identifican los archivos preparados; el historial y el estado remoto deben comprobarse después de publicar los cambios.',small)
+p('Código y evidencias publicados en el commit 6b2a4d408cdf442db07fc91009c5040b29f10fce. main y develop se verificaron en ese commit. Este informe actualizado puede corresponder a un commit documental posterior. Registrar la revisión final antes del congelamiento.',small)
 
 new('Arquitectura y seguridad')
 p('Navegador HTTPS → CloudFront → S3 privado para HTML, CSS y JavaScript. Para /api/*, CloudFront reenvía las peticiones sin caché a API Gateway HTTP, que invoca Lambda. Lambda consulta y modifica DynamoDB mediante un rol limitado a las dos tablas del proyecto.')
@@ -69,7 +69,7 @@ p('La baja de un nodo exige desactivarlo y conserva un marcador lógico. Sus rel
 new('Presupuesto y pendientes académicos')
 p('La evidencia de Budgets muestra un presupuesto de US$0.01, costo real acumulado de US$0.93 y previsión de US$1.48. Free Tier muestra US$198.33 de créditos restantes y cobertura por créditos del plan gratuito. Estas capturas no demuestran un cobro a la tarjeta ni garantizan costo cero.')
 p('<b>Pendiente:</b> la consola mostraba 0 de 1 correos del presupuesto verificados. La confirmación debe completarla quien tenga acceso al correo destinatario. No se accedió a su bandeja ni se confirmó el enlace. La cadencia de 5 segundos aumenta escrituras y tiempo de Lambda; revisar consumo actualizado antes de entregar.')
-table([['Elemento Moodle','Estado'],['URL pública','Disponible y probada.'],['Repositorio main y develop','Ramas existentes. Revisar publicación y coincidencia final antes del cierre. El historial auditado contiene 17 commits de un solo autor.'],['API y Postman','URL y colección incluidas; ejecución real aprobada.'],['Arquitectura e IAM','Implementación descrita y esquema incluido en la guía técnica.'],['Budgets y Free Tier','Capturas incluidas; falta verificación de destinatario y revisión del consumo reciente.'],['Credenciales','Incluidas en este documento y README para la demostración.']], [140,388])
+table([['Elemento Moodle','Estado'],['URL pública','Disponible y probada.'],['Repositorio main y develop','main y develop sincronizadas y publicadas en 6b2a4d4. El historial previo auditado contiene 17 commits de un solo autor; sigue pendiente acreditar aportes reales de los cinco integrantes.'],['API y Postman','URL y colección incluidas; ejecución real aprobada.'],['Arquitectura e IAM','Implementación descrita y esquema incluido en la guía técnica.'],['Budgets y Free Tier','Capturas incluidas; falta verificación de destinatario y revisión del consumo reciente.'],['Credenciales','Incluidas en este documento y README para la demostración.']], [140,388])
 p('Cada integrante debe realizar y explicar sus aportes reales. No se fabricaron commits ni se alteraron autores. El equipo debe ensayar los 25 minutos y subir el PDF, la colección y los enlaces a Moodle antes del cierre. No se ha enviado ningún archivo a Moodle.')
 p('Referencias oficiales: docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-lambda-function.html<br/>docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html',small)
 
