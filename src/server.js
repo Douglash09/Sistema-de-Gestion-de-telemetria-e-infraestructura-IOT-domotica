@@ -21,8 +21,6 @@ for(const u of usersList){
   const hash = scryptSync(defaultPass, salt, 64).toString('hex');
   if(!db.prepare('SELECT email FROM users WHERE email=?').get(u)) {
     db.prepare('INSERT INTO users VALUES(?,?,?)').run(u, salt, hash);
-  } else {
-    db.prepare('UPDATE users SET salt=?, hash=? WHERE email=?').run(salt, hash, u);
   }
 }
 const units={temperature:'°C',humidity:'%',energy:'kW',actuator:''};

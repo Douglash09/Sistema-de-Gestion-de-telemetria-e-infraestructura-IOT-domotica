@@ -6,6 +6,26 @@
 **Docente:** Ing. Herberth Contreras  
 **Ciclo Académico:** 2026  
 
+## Entrega AWS verificada el 19 de noviembre de 2026
+
+- Dashboard: https://d2pcuv7vmsa2tj.cloudfront.net
+- API mediante el mismo origen: https://d2pcuv7vmsa2tj.cloudfront.net/api
+- API directa: https://enbhdlt7v3.execute-api.us-east-1.amazonaws.com/api
+- Usuario de demostración: douglas.mendez1@catolica.edu.sv
+- Contraseña de demostración: Omar1010
+- Colección: [Postman AWS](aws/postman-dashboard.json). Configurar la contraseña como variable local.
+- Informe: [Informe de entrega AWS](docs/Informe_entrega_AWS.pdf).
+- Defensa: [Guía de ensayo](docs/GUIA_DEFENSA.md).
+- Infraestructura: [Despliegue reproducible](aws/DESPLIEGUE_DASHBOARD.md).
+
+La pila domotix-dashboard terminó en CREATE_COMPLETE. El simulador genera lecturas aproximadamente cada 5 segundos; el panel consulta cada 5 segundos mientras está visible. EventBridge inicia una ejecución por minuto y Lambda realiza 12 rondas durante unos 55 segundos, con límite de 90 segundos. La programación puede introducir variación entre ejecuciones.
+
+Verificación: 19 comprobaciones del script de integración; colección ejecutada con Newman con 17 solicitudes y 18 aserciones, sin fallos; alta, edición, creación de regla e inserción manual revisadas en la interfaz. Las capturas y resultados están en docs/evidencias/2026-11-19. El borrado completo fue comprobado por API y Postman; la automatización del navegador se interrumpió durante la prueba de borrado en la interfaz.
+
+Pendientes académicos: verificar el correo destinatario de Budgets, completar carnés, revisar las contribuciones reales de cinco integrantes, ensayar y subir el PDF y enlaces a Moodle antes de las 06:30 del 21 de noviembre de 2026. El historial revisado contiene un solo autor; no se atribuyeron cambios a otros integrantes.
+
+La documentación anterior describe la fase local y el avance inicial. Para AWS, los enlaces y credenciales de esta sección son los vigentes.
+
 ---
 
 ## 👥 Reparto de Roles del Equipo (5 Integrantes)

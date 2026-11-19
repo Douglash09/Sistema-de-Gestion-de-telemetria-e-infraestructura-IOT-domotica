@@ -1,0 +1,228 @@
+{
+  "at": "2026-11-19T19:45:44.864Z",
+  "baseUrl": "https://d2pcuv7vmsa2tj.cloudfront.net",
+  "stats": {
+    "iterations": {
+      "total": 1,
+      "pending": 0,
+      "failed": 0
+    },
+    "items": {
+      "total": 17,
+      "pending": 0,
+      "failed": 0
+    },
+    "scripts": {
+      "total": 17,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequests": {
+      "total": 17,
+      "pending": 0,
+      "failed": 0
+    },
+    "requests": {
+      "total": 17,
+      "pending": 0,
+      "failed": 0
+    },
+    "tests": {
+      "total": 17,
+      "pending": 0,
+      "failed": 0
+    },
+    "assertions": {
+      "total": 18,
+      "pending": 0,
+      "failed": 0
+    },
+    "testScripts": {
+      "total": 17,
+      "pending": 0,
+      "failed": 0
+    },
+    "prerequestScripts": {
+      "total": 0,
+      "pending": 0,
+      "failed": 0
+    }
+  },
+  "failures": [],
+  "requests": [
+    {
+      "name": "01 Iniciar sesión",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "02 Verificar sesión",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "03 Crear sensor de prueba",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "HTTP 201",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "04 Consultar sensores",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "05 Editar sensor",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "06 Crear regla",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "HTTP 201",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "07 Insertar lectura",
+      "status": 201,
+      "assertions": [
+        {
+          "name": "HTTP 201",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "08 Consultar histórico",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "09 Consultar alertas",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        },
+        {
+          "name": "Alerta creada",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "10 Atender alerta",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "11 Editar regla",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "12 Eliminar lectura de prueba",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "13 Eliminar regla de prueba",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "14 Desactivar sensor de prueba",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "15 Eliminar sensor de prueba",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "16 Cerrar sesión",
+      "status": 200,
+      "assertions": [
+        {
+          "name": "HTTP 200",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "17 Confirmar sesión cerrada",
+      "status": 401,
+      "assertions": [
+        {
+          "name": "HTTP 401",
+          "passed": true
+        }
+      ]
+    }
+  ]
+}

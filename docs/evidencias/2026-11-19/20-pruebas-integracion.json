@@ -1,0 +1,101 @@
+{
+  "base": "https://d2pcuv7vmsa2tj.cloudfront.net",
+  "passed": true,
+  "checks": [
+    {
+      "operation": "GET /devices",
+      "status": 401,
+      "at": "2026-11-19T19:20:58.964Z"
+    },
+    {
+      "operation": "POST /login",
+      "status": 200,
+      "at": "2026-11-19T19:20:59.816Z"
+    },
+    {
+      "operation": "GET /me",
+      "status": 200,
+      "at": "2026-11-19T19:20:59.961Z"
+    },
+    {
+      "operation": "POST /devices",
+      "status": 201,
+      "at": "2026-11-19T19:21:00.119Z"
+    },
+    {
+      "operation": "POST /rules",
+      "status": 201,
+      "at": "2026-11-19T19:21:00.431Z"
+    },
+    {
+      "operation": "POST /telemetry",
+      "status": 201,
+      "at": "2026-11-19T19:21:00.636Z"
+    },
+    {
+      "operation": "GET /readings?device_id=bfb964bc-cd85-4e91-a916-f0d686935e90",
+      "status": 200,
+      "at": "2026-11-19T19:21:00.943Z"
+    },
+    {
+      "operation": "PATCH /devices/bfb964bc-cd85-4e91-a916-f0d686935e90",
+      "status": 200,
+      "at": "2026-11-19T19:21:01.147Z"
+    },
+    {
+      "operation": "GET /devices",
+      "status": 200,
+      "at": "2026-11-19T19:21:01.565Z"
+    },
+    {
+      "operation": "GET /alerts",
+      "status": 200,
+      "at": "2026-11-19T19:21:01.682Z"
+    },
+    {
+      "operation": "PATCH /alerts/8e368b4d-f458-4b4e-bf33-631005154bfe",
+      "status": 200,
+      "at": "2026-11-19T19:21:01.864Z"
+    },
+    {
+      "operation": "PATCH /rules/89edc4f6-7160-44fe-ba92-e95a004074cb",
+      "status": 200,
+      "at": "2026-11-19T19:21:02.082Z"
+    },
+    {
+      "operation": "DELETE /readings/WyJiZmI5NjRiYy1jZDg1LTRlOTEtYTkxNi1mMGQ2ODY5MzVlOTAiLCIyMDI2LTExLTE5VDE5OjIwOjU5LjQ2NFojYjUxOTk2MTEtMzA1Ni00OTk3LWJkMTMtMmUwZTQ3YzI2Zjk1Il0",
+      "status": 200,
+      "at": "2026-11-19T19:21:02.277Z"
+    },
+    {
+      "operation": "GET /readings?device_id=bfb964bc-cd85-4e91-a916-f0d686935e90",
+      "status": 200,
+      "at": "2026-11-19T19:21:02.416Z"
+    },
+    {
+      "operation": "DELETE /rules/89edc4f6-7160-44fe-ba92-e95a004074cb",
+      "status": 200,
+      "at": "2026-11-19T19:21:02.683Z"
+    },
+    {
+      "operation": "PATCH /devices/bfb964bc-cd85-4e91-a916-f0d686935e90",
+      "status": 200,
+      "at": "2026-11-19T19:21:02.817Z"
+    },
+    {
+      "operation": "DELETE /devices/bfb964bc-cd85-4e91-a916-f0d686935e90",
+      "status": 200,
+      "at": "2026-11-19T19:21:02.944Z"
+    },
+    {
+      "operation": "POST /logout",
+      "status": 200,
+      "at": "2026-11-19T19:21:03.195Z"
+    },
+    {
+      "operation": "GET /me",
+      "status": 401,
+      "at": "2026-11-19T19:21:03.297Z"
+    }
+  ]
+}

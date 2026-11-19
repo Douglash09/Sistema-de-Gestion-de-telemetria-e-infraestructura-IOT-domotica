@@ -1,0 +1,438 @@
+{
+  "info": {
+    "name": "DomotiX AWS - Defensa CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Configurar baseUrl con la URL HTTPS de CloudFront SIN /api y password como variable local secreta. Ejecutar en orden; únicamente elimina los registros de prueba creados por esta colección. Postman conserva la cookie de sesión."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://d2pcuv7vmsa2tj.cloudfront.net"
+    },
+    {
+      "key": "email",
+      "value": "douglas.mendez1@catolica.edu.sv"
+    },
+    {
+      "key": "password",
+      "value": ""
+    },
+    {
+      "key": "deviceId",
+      "value": ""
+    },
+    {
+      "key": "ruleId",
+      "value": ""
+    },
+    {
+      "key": "readingId",
+      "value": ""
+    },
+    {
+      "key": "alertId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Iniciar sesión",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+        },
+        "url": "{{baseUrl}}/api/login"
+      }
+    },
+    {
+      "name": "02 Verificar sesión",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/me"
+      }
+    },
+    {
+      "name": "03 Crear sensor de prueba",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('deviceId',pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sensor Postman defensa\",\n  \"location\": \"QA Postman\",\n  \"type\": \"temperature\",\n  \"threshold\": 30\n}"
+        },
+        "url": "{{baseUrl}}/api/devices"
+      }
+    },
+    {
+      "name": "04 Consultar sensores",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/devices"
+      }
+    },
+    {
+      "name": "05 Editar sensor",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Sensor Postman editado\",\n  \"threshold\": 32\n}"
+        },
+        "url": "{{baseUrl}}/api/devices/{{deviceId}}"
+      }
+    },
+    {
+      "name": "06 Crear regla",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('ruleId',pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"device_id\": \"{{deviceId}}\",\n  \"name\": \"Calor Postman\",\n  \"operator\": \">\",\n  \"threshold\": 30\n}"
+        },
+        "url": "{{baseUrl}}/api/rules"
+      }
+    },
+    {
+      "name": "07 Insertar lectura",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 201',()=>pm.response.to.have.status(201));",
+              "pm.collectionVariables.set('readingId',pm.response.json().id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"device_id\": \"{{deviceId}}\",\n  \"value\": 42\n}"
+        },
+        "url": "{{baseUrl}}/api/telemetry"
+      }
+    },
+    {
+      "name": "08 Consultar histórico",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/readings?device_id={{deviceId}}"
+      }
+    },
+    {
+      "name": "09 Consultar alertas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));",
+              "const a=pm.response.json().find(a=>a.device_id===pm.collectionVariables.get('deviceId')); pm.test('Alerta creada',()=>pm.expect(a).to.exist); if(a)pm.collectionVariables.set('alertId',a.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/alerts"
+      }
+    },
+    {
+      "name": "10 Atender alerta",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": "{{baseUrl}}/api/alerts/{{alertId}}"
+      }
+    },
+    {
+      "name": "11 Editar regla",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"enabled\": false,\n  \"threshold\": 50\n}"
+        },
+        "url": "{{baseUrl}}/api/rules/{{ruleId}}"
+      }
+    },
+    {
+      "name": "12 Eliminar lectura de prueba",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/readings/{{readingId}}"
+      }
+    },
+    {
+      "name": "13 Eliminar regla de prueba",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/rules/{{ruleId}}"
+      }
+    },
+    {
+      "name": "14 Desactivar sensor de prueba",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"enabled\": false\n}"
+        },
+        "url": "{{baseUrl}}/api/devices/{{deviceId}}"
+      }
+    },
+    {
+      "name": "15 Eliminar sensor de prueba",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/devices/{{deviceId}}"
+      }
+    },
+    {
+      "name": "16 Cerrar sesión",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 200',()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": "{{baseUrl}}/api/logout"
+      }
+    },
+    {
+      "name": "17 Confirmar sesión cerrada",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('HTTP 401',()=>pm.response.to.have.status(401));"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/me"
+      }
+    }
+  ]
+}
