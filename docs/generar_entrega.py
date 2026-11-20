@@ -2,6 +2,7 @@
 from pathlib import Path
 source=Path(__file__).with_name('generar_informe.py').read_text(encoding='utf-8')
 setup=source.split("new('Sistema de gestión de telemetría IoT')")[0]
+setup=setup.replace('19 de noviembre de 2026','20 de noviembre de 2026')
 exec(setup.replace('Informe_preparacion_AWS.pdf','Informe_entrega_AWS.pdf').replace('Preparación y evidencias del despliegue AWS de DomotiX','Informe de entrega AWS de DomotiX'))
 
 new('Sistema de gestión de telemetría IoT')
@@ -11,10 +12,16 @@ h('Resultado')
 p('DomotiX está publicado en AWS. La pila domotix-dashboard finalizó en CREATE_COMPLETE. La prueba de integración aprobó 19 comprobaciones; la colección Postman ejecutada con Newman aprobó 17 solicitudes y 18 aserciones sin fallos. El panel consulta cada 5 segundos y el simulador genera lecturas con una cadencia aproximada de 5 segundos.')
 h('Integrantes')
 p('DOUGLA OMAR MENDEZ HERNANDEZ<br/>SAMUEL VLADIMIR GODOY AYALA<br/>RODRIGO ALEXANDER VALIENTE IBARRA<br/>KEVIN ALEJANDRO BURGOS BUSTILLO<br/>CLAUDIA MARISOL RAMOS SIERRA')
-p('Los carnés no fueron proporcionados. La distribución de temas de la guía de defensa es una propuesta para ensayar; no certifica la autoría del código.',small)
+p('Los carnés no fueron proporcionados. Las responsabilidades fueron confirmadas por el equipo el 20 de noviembre de 2026 y se detallan en la página siguiente.',small)
 h('Fechas de entrega y defensa')
 p('Entrega en Moodle y congelamiento: antes de las 06:30 del sábado 21 de noviembre de 2026, hora de El Salvador. Preparación: 06:50–06:55. Defensa: 06:55–07:20. El equipo debe conservar la misma versión de código y nube después del cierre.')
 p('Este informe reúne resultados técnicos comprobados y pendientes académicos. No acredita todavía el envío en Moodle, el ensayo individual ni aportes Git de cinco autores.')
+
+new('Responsabilidades de los cinco integrantes')
+p('Distribución confirmada por el equipo el 20 de noviembre de 2026. Se reservan cinco minutos por persona dentro de los 25 minutos de defensa.')
+table([['Integrante y rol','Responsabilidad'],['RODRIGO ALEXANDER VALIENTE IBARRA\nFrontend','Construye el panel, muestra métricas en tiempo real e incluye interruptores para actuadores de demostración.'],['CLAUDIA MARISOL RAMOS SIERRA\nBackend y simulador','Crea el programa de lecturas simuladas y el servidor de APIs; explica validación, ingesta JSON y operaciones REST.'],['DOUGLA OMAR MENDEZ HERNANDEZ\nAWS','Configura API Gateway y su integración con Lambda; explica el despliegue y los servicios conectados.'],['KEVIN ALEJANDRO BURGOS BUSTILLO\nBase de datos','Diseña el almacenamiento de lecturas y optimiza las consultas por tiempo mediante SensorId y Timestamp.'],['SAMUEL VLADIMIR GODOY AYALA\nSeguridad','Implementa el acceso de administradores y mantiene configuración y secretos fuera del código; explica sesiones y permisos IAM.']], [210,318])
+p('Cada integrante debe poder demostrar su área y explicar cómo se conecta al resto del sistema. Las responsabilidades asignadas deben acompañarse de aportes reales y verificables en el repositorio.')
+p('La contraseña de demostración se documenta para evaluación. Las credenciales de AWS, claves privadas y configuración sensible de infraestructura deben permanecer fuera del código versionado.')
 
 new('Enlaces y acceso de prueba')
 h('Dashboard público')

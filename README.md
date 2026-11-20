@@ -32,11 +32,11 @@ La documentación anterior describe la fase local y el avance inicial. Para AWS,
 
 | Rol | Integrante | Responsabilidad Principal |
 | :--- | :--- | :--- |
-| **Desarrollador 1** | Frontend Core | Panel en tiempo real para visualización de métricas de sensores y control switch para actuadores. |
-| **Desarrollador 2** | Backend & Mock IoT Data | Script simulador de envío de telemetría IoT y servidor de APIs REST. |
-| **Desarrollador 3** | Cloud Serverless Lead | Arquitectura e integración en AWS (API Gateway + AWS Lambda). |
-| **Desarrollador 4** | Database Architect | Optimización de consultas en base de datos tipo Time-Series (SQLite / DynamoDB). |
-| **Desarrollador 5** | Security & Auth | Gestión de autenticación de administradores (`scrypt`, sesiones seguras) y aislamiento de `.env`. |
+| **Desarrollador 1** | RODRIGO ALEXANDER VALIENTE IBARRA — Frontend Core | Panel en tiempo real para visualización de métricas de sensores y control switch para actuadores. |
+| **Desarrollador 2** | CLAUDIA MARISOL RAMOS SIERRA — Backend & Mock IoT Data | Script simulador de envío de telemetría IoT y servidor de APIs REST. |
+| **Desarrollador 3** | DOUGLA OMAR MENDEZ HERNANDEZ — Cloud Serverless Lead | Arquitectura e integración en AWS (API Gateway + AWS Lambda). |
+| **Desarrollador 4** | KEVIN ALEJANDRO BURGOS BUSTILLO — Database Architect | Optimización de consultas en base de datos tipo Time-Series (SQLite / DynamoDB). |
+| **Desarrollador 5** | SAMUEL VLADIMIR GODOY AYALA — Security & Auth | Gestión de autenticación de administradores (`scrypt`, sesiones seguras) y aislamiento de `.env`. |
 
 ---
 
